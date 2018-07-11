@@ -1,13 +1,13 @@
 "use strict";
 
-Module.register("MMM-OneBusAway", {
+Module.register("MMM-OneNote", {
     result: [],
     // Default module config.
     defaults: {
         appSecret: "",
         clientId: "",
         loginCode: "",
-        fadeSpeed: 5000
+        refreshRate: 1000*60 //every 1 minute
     },
 
     // Override dom generator.
@@ -23,6 +23,13 @@ Module.register("MMM-OneBusAway", {
             noBuses.innerHTML = "No OneNote data...";
             wrapper.appendChild(noBuses);
         } else { 
+            var validResults = 0;
+            var title = this.result[0];
+            for (var todoListIndex = 1 ; todoListIndex < this.result.length; todoListIndex++){
+                var todoItem = this.result[todoListIndex];
+                var todoListEntry = this.getToDoListEntry(todoItem);
+                wrapper.appendChild(todoListEntry);
+            }
             /*
             var validResults = 0;
             for (var departureIndex = 0; departureIndex < this.result.length && validResults < this.config.maxResults; departureIndex++) {
@@ -38,6 +45,14 @@ Module.register("MMM-OneBusAway", {
             */
         }
         return wrapper;
+    },
+
+    getToDoListEntry: function(todoItem){
+        var todoEntry = document.createElement("div");
+        var todoEntryText = document.createElement("span");
+        todoEntryText.innerHTML = todoItem;
+        todoEntry.appendChild(todoEntryText);
+        return todoEntry;
     },
 
     getBusEntry: function (route, arrival) {
@@ -72,7 +87,7 @@ Module.register("MMM-OneBusAway", {
         var self = this;
         setInterval(function () {
             self.getOneNoteData(); 
-        }, self.config.fadeSpeed);
+        }, self.config.refreshRate);
 
     },
 
