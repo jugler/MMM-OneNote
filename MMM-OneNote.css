@@ -1,0 +1,20 @@
+.MMM-OneBusAway {
+	position: relative;
+	top: 50%;
+	transform: translateY(-0%);
+	margin-top: 50px;
+}
+
+.MMM-OneBusAway .badge {
+	position: center;
+	padding-top: 5px;
+	padding-right: 10px;
+	margin-top: 10px;
+}
+
+.MMM-OneBusAway .oneBusAway span {
+	font-family: 'Helvetica Neue';
+	font-weight: 300;
+	font-size: 16pt;
+	color: #C0C0C8;	
+}
