@@ -4,25 +4,26 @@ Module.register("MMM-OneBusAway", {
     result: [],
     // Default module config.
     defaults: {
-        stopId: "1_2672",
-        maxResults: 5,
-        fadeSpeed: 1000 * 60, // update every minute
-        buses: []
+        appSecret: "",
+        clientId: "",
+        loginCode: "",
+        fadeSpeed: 5000
     },
 
     // Override dom generator.
     getDom: function () {
         var wrapper = document.createElement("div");
-        wrapper.className = "oneBusAway";
+        wrapper.className = "oneNote";
         if (this.hasLoaded == false) {   //No data has arrived
             var loadingMessage = document.createElement("span");
-            loadingMessage.innerHTML = "Checking Bus status...";
+            loadingMessage.innerHTML = "Loading OneNote data...";
             wrapper.appendChild(loadingMessage);
-        } else if (this.result.length == 0) { //No buses right now
+        } else if (this.result.length == 0) { //No OneNote data...
             var noBuses = document.createElement("span");
-            noBuses.innerHTML = "No bus departures soon.";
+            noBuses.innerHTML = "No OneNote data...";
             wrapper.appendChild(noBuses);
-        } else { //extract times of arrival for the buses
+        } else { 
+            /*
             var validResults = 0;
             for (var departureIndex = 0; departureIndex < this.result.length && validResults < this.config.maxResults; departureIndex++) {
                 var departureDetails = this.result[departureIndex]
@@ -34,6 +35,7 @@ Module.register("MMM-OneBusAway", {
                     validResults++;
                 }
             }
+            */
         }
         return wrapper;
     },
@@ -60,26 +62,26 @@ Module.register("MMM-OneBusAway", {
     },
 
     getStyles: function () {
-        return ["MMM-OneBusAway.css"];
+        return ["MMM-OneNote.css"];
     },
 
     start: function () {
         this.hasLoaded = false;
 
-        this.getBusesInfo();
+        this.getOneNoteData();
         var self = this;
         setInterval(function () {
-            self.getBusesInfo(); 
+            self.getOneNoteData(); 
         }, self.config.fadeSpeed);
 
     },
 
-    getBusesInfo: function () {
-        this.sendSocketNotification('GET_BUSES_INFO', this.config.stopId);
+    getOneNoteData: function () {
+        this.sendSocketNotification('GET_ONENOTE_DATA', this.config);
     },
 
     socketNotificationReceived: function (notification, payload) {
-        if (notification === "BUSES_INFO") {
+        if (notification === "ONENOTE_DATA") {
             this.hasLoaded = true;
             this.result = payload;
             this.updateDom();
