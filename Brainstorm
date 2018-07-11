@@ -1,0 +1,63 @@
+Ok to use the onenote api!
+
+INFO:
+APP secret: gzeFYRQR74-aurbKN221?~%
+Client ID: 9b1ff838-c5f1-462c-994a-80e1d55d3c10
+Code: M6ae4f858-cb2a-e771-7802-abe29135e5e5
+
+
+
+1. Use this URl to signin and get the code field
+    https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=9b1ff838-c5f1-462c-994a-80e1d55d3c10&redirect_uri=https://login.live.com/oauth20_desktop.srf&scope=office.onenote wl.signin wl.offline_access
+
+It returns something like:
+    https://login.live.com/oauth20_desktop.srf?code=Md0f58460-bcff-4140-ac56-56e2d9210d73&lc=1033
+
+2. From there, extract the code field: Md0f58460-bcff-4140-ac56-56e2d9210d73
+
+3. Use that code field for this post request with x-www-form-urlencoded:
+    https://login.live.com/oauth20_token.srf?grant_type=authorization_code&client_id=9b1ff838-c5f1-462c-994a-80e1d55d3c10&client_secret=gzeFYRQR74-aurbKN221?~%&code=M6ae4f858-cb2a-e771-7802-abe29135e5e5&redirect_uri=https://login.live.com/oauth20_desktop.srf
+
+POST https://login.live.com/oauth20_token.srf
+Content-Type: application/x-www-form-urlencoded
+grant_type:authorization_code
+client_id:9b1ff838-c5f1-462c-994a-80e1d55d3c10
+code:M6ae4f858-cb2a-e771-7802-abe29135e5e5
+redirect_uri:https://login.live.com/oauth20_desktop.srf
+
+4. That returns an access token and a refresh token
+{
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "scope": "office.onenote wl.signin wl.offline_access",
+    "access_token": "EwAgA61DBAAUcSSzoTJJsy+XrnQXgAKO5cj4yc8AAazkoDmc/pV/mVOA1ddIHIr3XH25PFN3JXySofBN8UBnNYDbrKxtRxdkrOtFz0tRe0oJCxmORcROqm8VtjONooE/LFLTRCvBmzL1/vmIzfFlaz4mtsBOIsKkK7eiCg9MqifbIJps3I6OCx/eHWWcbxBYJj6n0PK/mofgsuKucusJ/hq365zoM6NMw/84eG7pgNleoXflaPBhSCjZT3wV8pCRLCQpiDbVSphpDpyw4cpdeB2UGpA7YDX2qeJQ3WpAWd5sSx6p+mX+Arep1nQ4mXoU6/oh/iLZyITwly2Mf8BigpL8jxJItsBE868fSUKKzXbuwu2YQRWcqnrHHHn495QDZgAACOHMEajYlEMN8AEUzjHx/7P/Nucc6oRlz+zJI4LE6X/zIL4O6XlgucUOKguhvoFBCtO80OllibktOgHp5oNOW+kOp8v/pUDtRadlpHruLvXqYKiP2mqi/RuadVdQzlvTYAO+XswcKp1CDQA7OR3IUIm1NzjBW7VKoN8zIaIETSHDtRrUH2Ra7wHuk76qHQt7vqxXz3dMI3hBB4FC/wLFCn1aAg36cmBUlUQ5ALsXpVDmwHglfG3G7uD+GVRKs1/vPYzDH9or5ApPlXLNDF0lSQqRaFwqxOL65DKhD0LUSpTx/uS/EviFztXViTn3wDUppzRxmXl8HGAotSv5ROFtk1c9U9lMt13ufvheRVWx1x/rFxWF/6FVpAgiiVD9kLwXke4aLb5mWg4bwuMn1hDfWAuGWyhb515lJmuNvILMZFNxxlKK+9wic008iseEAE/Ojy81/5tD+PMMobFadT8GsQ6YpwoM/PjoBaFtLm+qljCzMvq0uvqH8POm9ybO8afothphuQAqbWNlUmQxatcY5WSWA+/lxw6cffy4oAGAv0BfnuJ6QJ9z13zyWcAKZMQORayY+AzkK5DUWORV/u2m0sX3c0Qeatu9naNwk7JzyWnfp+sFSpPcojRoQvQoWfP/cdJS9X8zK7654Ulb97sLwfZuzlu6S7nOduQxEgI=",
+    "refresh_token": "MCV84TTz8LqK5Nmts5YGlS!qSLuPipb9cBmSWisveJ7l!qJdYBKwt!qdgJ*HOlUUPJTx2ZANimswYuN2R4vHn3VRQgsBiDhR3aMT8WBktNRXFJwJkbXWIByRSSF9kL0!XdUNHxpP*vqVQJYn51MwmeBCH5JuXR5mvp*525G*ZMYpa9!H*a8M2EvvyabeXZfbDep7keG9HqbhnK!GYCWH7xsQWhJvh40wwRpf6nYBWSr0RG1nPy50nyEViDX7o4A4F53PGwSfDIvmeJ9eHPug9nrEE7ZUNs!LHqzlbr6N2Lu!7RPhNjL7xx0DUc7QLhBuJJRaFfK3K7cVB2OHF1GKADxsrScE6cR5PMEbOvej*69RNyWNV99WNnu5UiQpcKHxMvQ$$",
+    "user_id": "AAAAAAAAAAAAAAAAAAAAAEHDvOLuWRUk2iiWlMnBsig"
+}
+
+5. Use this endpoint to get the pages 
+https://developer.microsoft.com/en-us/graph/graph-explorer#
+and there put this https://graph.microsoft.com/v1.0/me/onenote/pages
+eg. #week
+    "id": "0-172cac4bb473d44aac4bca34e8930b46!1-5C3350735A2D52EB!77037",
+    "title": "July 9 - 13",
+
+eg. #weekend
+    "id": "0-5d7af7150997d9073717d9ede5f53f3b!1-5C3350735A2D52EB!69713",
+    "title": "July 13 - 15",
+
+6. Use this endpoint to get the data:
+https://www.onenote.com/api/v1.0/me/notes/pages/0-172cac4bb473d44aac4bca34e8930b46!1-5C3350735A2D52EB!77037/content
+use the id of the page you want the data
+
+7. ??? profit!
+
+Access tokens are only valid for an hour, so you'll need to get fresh tokens when they expire. 
+8. Refresh the token with
+POST https://login.live.com/oauth20_token.srf
+Content-Type: application/x-www-form-urlencoded
+
+grant_type:refresh_token
+client_id:9b1ff838-c5f1-462c-994a-80e1d55d3c10
+redirect_uri:https://login.live.com/oauth20_desktop.srf
+&refresh_token:MCV84TTz8LqK5Nmts5YGlS!qSLuPipb9cBmSWisveJ7l!qJdYBKwt!qdgJ*HOlUUPJTx2ZANimswYuN2R4vHn3VRQgsBiDhR3aMT8WBktNRXFJwJkbXWIByRSSF9kL0!XdUNHxpP*vqVQJYn51MwmeBCH5JuXR5mvp*525G*ZMYpa9!H*a8M2EvvyabeXZfbDep7keG9HqbhnK!GYCWH7xsQWhJvh40wwRpf6nYBWSr0RG1nPy50nyEViDX7o4A4F53PGwSfDIvmeJ9eHPug9nrEE7ZUNs!LHqzlbr6N2Lu!7RPhNjL7xx0DUc7QLhBuJJRaFfK3K7cVB2OHF1GKADxsrScE6cR5PMEbOvej*69RNyWNV99WNnu5UiQpcKHxMvQ$$
