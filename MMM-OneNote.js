@@ -4,9 +4,9 @@ Module.register("MMM-OneNote", {
     result: [],
     // Default module config.
     defaults: {
-        appSecret: "",
-        clientId: "",
-        loginCode: "",
+        appSecret: "vgckR941#@kiiGFWORE80+]",
+        clientId: "25b33baa-9000-4453-88b0-b24f0cf568b3",
+        initialToken: "MCfxOuj1NNWWZYRmqnleeW322TFCH7TVIIUg1oVxdQ8Bc2w2p7VZzs6ZK7xM32yNNzxHZKsFVme4es*GrLQuRMB7cyxwW0!7RiBqXuraHfIzazK9gB9tCFntBqI2yQ9Jd74yBRuB*g!kCt3u8o8hA2N2oCcLKjBHvyChA8IqomVt1VAFBhbSjVlb2VsOtVxxfdcC!H1*FdrtP2bOkxpOetP2Hqc!UU5ssGeNlzf878bym2Wfy6!z9Dxl8SoHTXdHBxJuZrUvzv0yuP3atL!buFsc8U8fmzrKmWrKy2yVBRqJSbIvEfynCzGWrdS1okdvD9vutJnskTPiI2mqcxu4vGx2nY*fS2wRRF3Z6Lt2SDrk7",
         refreshRate: 1000*60 //every 1 minute
     },
 

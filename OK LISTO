@@ -1,0 +1,36 @@
+Para referencia aca: https://docs.microsoft.com/en-us/graph/auth-v2-user
+
+INFO:
+APP secret: vgckR941#@kiiGFWORE80+]
+Client ID: 25b33baa-9000-4453-88b0-b24f0cf568b3
+
+
+https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=25b33baa-9000-4453-88b0-b24f0cf568b3&response_type=code&redirect_uri=https://google.com&response_mode=query&scope=offline_access%20notes.read.all&state=12345
+
+eso te obliga a loggearte pero te devuelve un Mcode que expira en chinga:
+
+
+con eso haces un POST aca:
+https://login.microsoftonline.com/common/oauth2/v2.0/token
+con parametros:
+client_id:25b33baa-9000-4453-88b0-b24f0cf568b3
+scope:notes.read.all
+code:M6a3b1203-fd0f-4ee6-d57e-df8f4c87da0c
+redirect_uri:https://google.com
+grant_type:authorization_code
+client_secret:vgckR941#@kiiGFWORE80+]
+
+Eso te devuelve un puto token que expira caon en 1 hora? (3600 secs)
+
+EwBwA8l6BAAURSN/FHlDW5xN74t6GzbtsBBeBUYAAYuAchyk9k8weax/qtHeXZB2F5vamBU0IG67959JjdIWpqylwC5vDskgEEe3+Wll+I9PUnwGIs2QYs3zNs2pQCWfksn3ur1pnAykdCaqXHx1ctdlAt6y9dw5cOHPy8c4fpy7fiMCvlHWPHef82MYu+LcZPoUmt57fYqdTt/wXIfKIz+eHqw/S1kRBwY2ub7UztBNZ2XExFgGOhNsN172pm8zmW+iPjJWD2RPwmpUcpZtBZrF/M3QpJNI0kLidsiHBPW18vXUJcfQ0TrCxn885EUORnOF1lxocQ0jvrwXi4mWu2OIEMtMtAuxU6d2nO2MEp34Z4RxmUDNBucVRW62EHgDZgAACK5Qh3EupcQPQALslXmmjvW07sOBYHuSuePsHZI07amktUQJUSJremJUP4zkjo9qSGixgiG6CCZpNSJqI+BhjgcsT95zwdFlPBA92HlqJc3zYBi5aVjKY1eaAolJVEi+Sguxmcd/pBQF6eoRAwyO0IK20TOIL/+ShEYTqJ+5hH8Ei5+jaIZZYt34D3UdyEqgrCy1OQ2IBr+4mk8xyNssfUwl4Y1xKT+2imezSOAs0YloxellizgmypLaJGWMbuyurwv7UGfZLFCblO4ghpMK0Qu0gt/6R24gRSo7JRpyiZt3G6N5LeOIzF9U++P/PZ3DJu8dC0ZHpRlxccZNvptYqv22p6tRTWkaiBAjqK83BEWNsLNFq1xgLeleoSHWIcpaL5T57Nce4FMm3eeMOutxhueotWaPpItIuBpQYUkXHRwDZ39Aha7jHNB0/I9/u2S6z62clgJzGH4Z3+Hi3cfTit4hTNEMCNnUN4sWIXAGkTxFrfLOUFDbRO3+CW+MFFJckHJ/2TQAJdQFL08yLDwroGwteSw8XOPsS/uNMlbL2VWTuRexTfy5zVE7BULVTIgdvPmitVw0KcxIk/jC3tBW3aW/SDnp9cO1lmbUCSQ0zG7fwS0dN36jN1S+kNsRkOp0VrxXWh6bOMBKZJUOa1Dv1Uarh4WcTaB+8fTzvUDYKfrDBTHrai+s2HG6sm3W40ZlZHTqvxRCuF5JZTpyik9DmxHSa7KW4dk0+kyRN35fgRLDOjgmfOdyQykJwycrt/VvJExxuq2Efjy8dHFuAg==
+
+y tambien te da un refresh token caon!
+
+Ahh pues con esa mamada vas y ahora si entras a graph caon
+
+https://graph.microsoft.com/v1.0/me/onenote/pages/0-4ecd42f4f801e90102c9997626a05ef0!1-5C3350735A2D52EB!77037/content
+
+y te devuelve tu mamada!
+y cada 1 minuto le haces refresh al puto token va!!!
+
+M205f817c-d262-d94f-4a01-9623bc5c7308
